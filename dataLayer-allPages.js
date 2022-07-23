@@ -447,6 +447,18 @@ __DL__jQueryinterval = setInterval(function(){
                             
                 /** DATALAYER: Transaction */
                 if(Shopify.Checkout.page == "thank_you"){
+		     transactionData = {
+                    'transactionNumber'      : {{checkout.order_id | json}},
+                    'transactionId'          : {{checkout.order_number | json}},
+                    'transactionAffiliation' : {{shop.name | json}},
+                    'transactionTotal'       : {{checkout.total_price | money_without_currency| remove: "," | json}},
+                    'transactionTax'         : {{checkout.tax_price | money_without_currency| remove: "," | json}},
+                    'transactionShipping'    : {{checkout.shipping_price | money_without_currency| remove: "," | json}},
+                    'transactionSubtotal'    : {{checkout.subtotal_price | money_without_currency| remove: "," | json}},
+                    {% for discount in checkout.discounts %}
+                    'promoCode' : {{discount.code | json}},
+                    'discount'  : {{discount.amoun t | money_without_currency | json}},
+                    {% endfor %}
                     dataLayer.push({
                     'pageType' :'Transaction',
                     'event'    :'purchase',
