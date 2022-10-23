@@ -6,7 +6,7 @@
 * FORKED FROM: https://github.com/TechnicalWebAnalytics/dataLayer-shopify
 
 * AUTHOR: Paolo Bietolini {
-    website: paolobietolini.com || analyticsitalia.it,
+    website: paolobietolini.xyz || analyticsitalia.it,
     linkedin: /in/paolobietolini/,
     github: paolobtl
 }
@@ -317,9 +317,9 @@ __DL__jQueryinterval = setInterval(function(){
             var ecommerce = {
                 'items': [
                     {% for product in collection.products %}{
-                        'item_id'        : {{product.id | json}},                  
+                        'item_id'         : '{{product.id | json}}',                  
                         'item_variant'    : {{product.selected_variant.title | json}},             
-                        'item_name'      : {{product.title | json}},
+                        'item_name'       : {{product.title | json}},
                         'price'           : {{product.price | money_without_currency | replace: ',', '.' | json}},
                         'item_brand'      : {{product.vendor | json}},
                         'item_category'   : {{product.type | json}},
@@ -343,7 +343,7 @@ __DL__jQueryinterval = setInterval(function(){
         {% if template contains 'product' %}  
             var ecommerce = {
                 'items': [{
-                    'item_id'        : {{product.id | json}},  
+                    'item_id'        : '{{product.id | json}}',  
                     'item_variant'    : {{product.selected_variant.title | json}},             
                     'item_name'      : {{product.title | json}},
                     'price'           : {{product.price | money_without_currency | replace: ',', '.' | json}},
@@ -376,7 +376,7 @@ __DL__jQueryinterval = setInterval(function(){
                 'currency': {{cart.currency.iso_code | json}},
                 'value': {{cart.total_price | divided_by: 100.0 | json}},
                 'items':[{% for line_item in cart.items %}{
-                    'item_id'        : {{line_item.product.id | json}},                  
+                    'item_id'        : '{{line_item.product.id | json}}',                  
                     'item_variant'    : {{line_item.variant.title | json}},             
                     'item_name'      : {{line_item.product.title | json}},
                     'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | json}},
@@ -410,9 +410,9 @@ __DL__jQueryinterval = setInterval(function(){
                 {% endfor %}
                 'email': {{checkout.email | json}},
                 'items':[{% for line_item in checkout.line_items %}{
-                    'item_id'        : {{line_item.product.id | json}},                  
+                    'item_id'         : '{{line_item.product.id | json}}',                  
                     'item_variant'    : {{line_item.variant.title | json}},             
-                    'item_name'      : {{line_item.product.title | json}},
+                    'item_name'       : {{line_item.product.title | json}},
                     'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | json}},
                     'item_brand'      : {{line_item.product.vendor | json}},
                     'item_category'   : {{line_item.product.type | json}},
@@ -447,18 +447,6 @@ __DL__jQueryinterval = setInterval(function(){
                             
                 /** DATALAYER: Transaction */
                 if(Shopify.Checkout.page == "thank_you"){
-		     transactionData = {
-                    'transactionNumber'      : {{checkout.order_id | json}},
-                    'transactionId'          : {{checkout.order_number | json}},
-                    'transactionAffiliation' : {{shop.name | json}},
-                    'transactionTotal'       : {{checkout.total_price | money_without_currency| remove: "," | json}},
-                    'transactionTax'         : {{checkout.tax_price | money_without_currency| remove: "," | json}},
-                    'transactionShipping'    : {{checkout.shipping_price | money_without_currency| remove: "," | json}},
-                    'transactionSubtotal'    : {{checkout.subtotal_price | money_without_currency| remove: "," | json}},
-                    {% for discount in checkout.discounts %}
-                    'promoCode' : {{discount.code | json}},
-                    'discount'  : {{discount.amoun t | money_without_currency | json}},
-                    {% endfor %}
                     dataLayer.push({
                     'pageType' :'Transaction',
                     'event'    :'purchase',
@@ -476,9 +464,9 @@ __DL__jQueryinterval = setInterval(function(){
             if(document.location.pathname.match(searchPage)){
                 var ecommerce = {
                     items :[{% for product in search.results %}{
-                        'item_id'        : {{product.id | json}},                  
+                        'item_id'         : '{{product.id | json}}',                  
                         'item_variant'    : {{product.variant.title | json}},             
-                        'item_name'      : {{product.title | json}},
+                        'item_name'       : {{product.title | json}},
                         'price'           : {{product.price | money_without_currency | replace: ',', '.' | json}},
                         'item_brand'      : {{product.vendor | json}},
                         'item_category'   : {{product.type | json}},
@@ -498,7 +486,7 @@ __DL__jQueryinterval = setInterval(function(){
             {% if template contains 'cart' %}
                 var ecommerce = {
                     'items':[{% for line_item in cart.items %}{
-                        'item_id'        : {{line_item.product.id | json}},                  
+                        'item_id'        : '{{line_item.product.id | json}}',                  
                         'item_variant'    : {{line_item.variant.title | json}},             
                         'item_name'      : {{line_item.product.title | json}},
                         'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | json}},
@@ -524,7 +512,7 @@ __DL__jQueryinterval = setInterval(function(){
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-00000');
+            })(window,document,'script','dataLayer','GTM-TMV9QCH');
 
         }); // document ready
     }
