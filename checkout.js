@@ -1,4 +1,9 @@
+?***pls cordial request to add 
+logState & customer Info in the checkout.js file.
+Actually purchase tag is firing perfectly but the customer information are not showing from log state. **/
+
 <script>
+
   var ecommerce = {
       'transaction_id': '{{checkout.order_number  | json}}',
       'affiliation': {{shop.name | json}},
